@@ -6,7 +6,7 @@ using PickPoint.TestTask.Storage.Shared.Enums;
 
 namespace PickPoint.TestTask.Storage.Repository.Translators;
 
-public static class OrderTranslator
+internal static class OrderTranslator
 {
     public static Order ToEntity(this CreateOrderQuery query)
     {

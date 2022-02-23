@@ -4,7 +4,7 @@ using PickPoint.TestTask.Storage.Shared;
 
 namespace PickPoint.TestTask.Storage.Repository.Translators;
 
-public static class PickUpPointTranslator
+internal static class PickUpPointTranslator
 {
     [ContractAnnotation("entity:null => halt")]
     public static PickUpPointDto ToDto(this PickUpPoint entity)

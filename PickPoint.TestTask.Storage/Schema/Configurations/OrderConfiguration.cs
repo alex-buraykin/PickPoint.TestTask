@@ -14,7 +14,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasColumnType("decimal(18,2)");
 
         builder.Property(s => s.RecipientPhone)
-            .HasMaxLength(15)
+            .HasMaxLength(16)
             .IsRequired();
 
         builder.Property(s => s.RecipientFullName)

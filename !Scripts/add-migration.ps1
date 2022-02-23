@@ -2,7 +2,7 @@ $targetProject = ".\..\PickPoint.TestTask.Storage"
 $startupProject = ".\..\PickPoint.TestTask.WebApi"
 
 # do not forget set migration name
-$migrationName = "CreateSchema";
+$migrationName = ""
 
 if ($migrationName -eq "") {
     Write-Error "Error: migration name is not set"

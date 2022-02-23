@@ -6,7 +6,7 @@ namespace PickPoint.TestTask.Storage.Repository.Interfaces;
 public interface IOrderRepository
 {
     Task<OrderDto> CreateAsync(CreateOrderQuery query);
-    Task<OrderDto> EditAsync(EditOrderQuery query);
+    Task<OrderDto?> EditAsync(EditOrderQuery query);
     Task<OrderDto?> FindAsync(int id);
-    Task DeleteAsync(int id);
+    Task<bool> TryCancelAsync(int id);
 }

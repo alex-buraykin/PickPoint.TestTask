@@ -5,6 +5,7 @@ using PickPoint.TestTask.Storage.Repository.Translators;
 using PickPoint.TestTask.Storage.Schema;
 using PickPoint.TestTask.Storage.Schema.Entities;
 using PickPoint.TestTask.Storage.Shared;
+using PickPoint.TestTask.Storage.Shared.Enums;
 
 namespace PickPoint.TestTask.Storage.Repository;
 
@@ -26,18 +27,22 @@ public class OrderRepository : IOrderRepository
         return entity.ToDto();
     }
 
-    public async Task<OrderDto> EditAsync(EditOrderQuery query)
+    public async Task<OrderDto?> EditAsync(EditOrderQuery query)
     {
         var entity = await _dbContext.Orders
             .Include(s => s.Products)
             .FirstOrDefaultAsync(s => s.Id == query.Id);
         if (entity is null)
-            throw new ArgumentException($"Item with id {query.Id} is not found");
+            return null;
 
-        entity.Price = query.Price;
-        entity.RecipientPhone = query.RecipientPhone;
-        entity.RecipientFullName = query.RecipientFullName;
-        entity.Products = query.Products.Select(s => new OrderProduct {Name = s}).ToList();
+        if (query.Price.HasValue)
+            entity.Price = query.Price.Value;
+        if (query.RecipientPhone is not null)
+            entity.RecipientPhone = query.RecipientPhone;
+        if (query.RecipientFullName is not null)
+            entity.RecipientFullName = query.RecipientFullName;
+        if (query.Products is not null)
+            entity.Products = query.Products.Select(s => new OrderProduct {Name = s}).ToList();
         
         await _dbContext.SaveChangesAsync();
         return entity.ToDto();
@@ -53,15 +58,16 @@ public class OrderRepository : IOrderRepository
         return entity?.ToDto();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<bool> TryCancelAsync(int id)
     {
         var entity = await _dbContext.Orders
             .Include(s => s.Products)
             .FirstOrDefaultAsync(s => s.Id == id);
         if (entity is null)
-            throw new ArgumentException($"Item with id {id} is not found");
-        
-        _dbContext.Orders.Remove(entity);
+            return false;
+
+        entity.State = OrderState.Cancelled;
         await _dbContext.SaveChangesAsync();
+        return true;
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PickPoint.TestTask.Storage.Schema;
 
@@ -10,9 +11,10 @@ using PickPoint.TestTask.Storage.Schema;
 namespace PickPoint.TestTask.Storage.Migrations.SqlServerMigrations
 {
     [DbContext(typeof(DbContextMsSql))]
-    partial class DbContextMsSqlModelSnapshot : ModelSnapshot
+    [Migration("20220223163943_FixPhoneLenght")]
+    partial class FixPhoneLenght
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

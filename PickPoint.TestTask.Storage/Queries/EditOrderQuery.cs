@@ -2,7 +2,7 @@
 
 public readonly record struct EditOrderQuery(
     int Id, 
-    decimal Price,
-    string RecipientPhone,
-    string RecipientFullName,
-    IReadOnlyCollection<string> Products);
+    decimal? Price,
+    string? RecipientPhone,
+    string? RecipientFullName,
+    IReadOnlyCollection<string>? Products);
