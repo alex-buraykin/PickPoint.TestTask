@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PickPoint.TestTask.Storage.Repository;
+using PickPoint.TestTask.Storage.Repository.Interfaces;
+using PickPoint.TestTask.Storage.Schema;
 using PickPoint.TestTask.WebApi.Controllers;
 
 namespace PickPoint.TestTask.WebApi;
@@ -24,6 +27,11 @@ public class Startup
             // add xml documentation
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "PickPoint.TestTask.WebApi.xml"));
         });
+        
+        // Setup database
+        services.AddDbContext<IDbContext, DbContextMsSql>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IPickUpPointRepository, PickUpPointRepository>();
 
         services.AddControllers()
             .AddApplicationPart(typeof(HealthController).Assembly);

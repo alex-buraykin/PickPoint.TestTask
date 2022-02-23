@@ -21,11 +21,5 @@
     <ItemGroup>
       <ProjectReference Include="..\PickPoint.TestTask.Storage.Shared\PickPoint.TestTask.Storage.Shared.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Queries" />
-      <Folder Include="Repository\Interfaces" />
-      <Folder Include="Repository\Translators" />
-    </ItemGroup>
     
 </Project>
