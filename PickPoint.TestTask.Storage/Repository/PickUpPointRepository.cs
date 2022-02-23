@@ -15,13 +15,13 @@ public class PickUpPointRepository : IPickUpPointRepository
         _dbContext = dbContext;
     }
     
-    public async Task<IReadOnlyCollection<PickUpPointDto>> GetAvailableAsync()
+    public async Task<IReadOnlyCollection<string>> GetAvailableAsync()
     {
         return await _dbContext.PickUpPoints
             .AsNoTracking()
             .Where(s => s.State)
             .OrderBy(s => s.Id)
-            .Select(s => s.ToDto())
+            .Select(s => s.Id)
             .ToArrayAsync();
     }
 

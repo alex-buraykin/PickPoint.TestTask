@@ -31,6 +31,8 @@ public class DbContextMsSql : DbContext, IDbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlServer(_configuration.GetConnectionString("PickPointDb"));
+        var connectionString = _configuration.GetConnectionString("PickPointDb");
+        
+        options.UseSqlServer(connectionString);
     }
 }

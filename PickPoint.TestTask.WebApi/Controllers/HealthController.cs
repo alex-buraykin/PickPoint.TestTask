@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PickPoint.TestTask.WebApi.Models;
 
@@ -19,6 +20,7 @@ public class HealthController : Controller
     /// </summary>
     [HttpGet]
     [Route("Health")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<HealthCheckResponse> HealthCheck()
     {
         return Ok(HealthCheckResponse);
@@ -29,6 +31,7 @@ public class HealthController : Controller
     /// </summary>
     [HttpGet]
     [Route("Version")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<VersionResponse> Version()
     {
         var assembly = Assembly.GetAssembly(typeof(HealthController));

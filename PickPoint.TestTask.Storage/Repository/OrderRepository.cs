@@ -38,7 +38,6 @@ public class OrderRepository : IOrderRepository
         entity.RecipientPhone = query.RecipientPhone;
         entity.RecipientFullName = query.RecipientFullName;
         entity.Products = query.Products.Select(s => new OrderProduct {Name = s}).ToList();
-        entity.PickUpPointId = query.PickUpPointId;
         
         await _dbContext.SaveChangesAsync();
         return entity.ToDto();

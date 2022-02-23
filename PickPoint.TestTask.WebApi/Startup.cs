@@ -33,8 +33,7 @@ public class Startup
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IPickUpPointRepository, PickUpPointRepository>();
 
-        services.AddControllers()
-            .AddApplicationPart(typeof(HealthController).Assembly);
+        services.AddControllers();
         
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
@@ -57,8 +56,6 @@ public class Startup
         });
         
         app.UseRouting();
-        app.UseAuthentication();
-        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {

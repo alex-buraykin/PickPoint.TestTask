@@ -5,5 +5,4 @@ public readonly record struct EditOrderQuery(
     decimal Price,
     string RecipientPhone,
     string RecipientFullName,
-    IReadOnlyCollection<string> Products,
-    string PickUpPointId);
+    IReadOnlyCollection<string> Products);
